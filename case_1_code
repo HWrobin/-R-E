@@ -1,0 +1,23 @@
+import math
+
+L = float(input())
+g = 9.8
+h = float(input())
+
+def a(x):
+    return math.tan(x)
+
+def b(x):
+    return math.cos(x)**2 * ((g * L + ((0.45)/2)**2) / (((L + ((0.45)/2)) * math.tan(x) - 3.05 + h) * 2 * math.cos(x)**2))
+
+def f(x):
+    result = (math.sqrt(((g * (L + 0.45)**2) / (((L + 0.45) * math.tan(x) - 3.05 + h) * 2 * math.cos(x)**2))) - 
+               math.sqrt(((g * L**2) / ((L * math.tan(x) - 3.05 + h) * 2 * math.cos(x)**2)))) / (((b(x) * ((L + 0.45)/2) - a(x) * math.sqrt((a(x) - b(x) * ((L + 0.45)/2))**2 + 1) - math.asinh(a(x) - b(x) * ((L + 0.45)/2))) / (2 * b(x))) - 
+              ((-a(x) * math.sqrt(a(x)**2 + 1) - math.asinh(a(x))) / (2 * b(x))))
+
+    return result
+A = []
+for i in range(3000,8000):
+    x = i/100*m.pi/180
+    A.append(f(x))
+print((3000 + A.index(max(A)))/100)
